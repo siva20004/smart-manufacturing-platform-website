@@ -79,6 +79,11 @@ public class ManufacturingContextRetriever {
                 }
                 ctx.addSummary(summary.toString());
             });
+
+            if (orderCode.regionMatches(true, 0, "PRD-", 0, 4)
+                    && ctx.getProductionOrders().isEmpty()) {
+                return ctx;
+            }
         }
 
         // 2. Material Shortages / BOM queries (e.g., "shortage", "materials", "HM-500", "piston pump")
