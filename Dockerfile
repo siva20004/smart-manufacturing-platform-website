@@ -1,5 +1,5 @@
 # Build stage
-FROM eclipse-temurin:21-jdk-alpine AS builder
+FROM eclipse-temurin:25-jdk-alpine AS builder
 WORKDIR /app
 # Copy maven executable to the image
 COPY mvnw .
@@ -14,7 +14,7 @@ COPY src src
 RUN ./mvnw clean package -DskipTests
 
 # Runtime stage
-FROM eclipse-temurin:21-jre-alpine
+FROM eclipse-temurin:25-jre-alpine
 WORKDIR /app
 
 # Add a non-root user and setup directories with proper permissions
