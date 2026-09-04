@@ -6,7 +6,6 @@ import com.sivamachineworks.platform.pdm.repository.ProductRepository;
 import com.sivamachineworks.platform.rag.domain.RagDocument;
 import com.sivamachineworks.platform.rag.domain.RagDocumentChunk;
 import com.sivamachineworks.platform.rag.dto.IngestDocumentRequest;
-import com.sivamachineworks.platform.rag.repository.RagDocumentChunkRepository;
 import com.sivamachineworks.platform.rag.repository.RagDocumentRepository;
 import com.sivamachineworks.platform.shared.exception.BaseException;
 import com.sivamachineworks.platform.shared.exception.ErrorCode;
@@ -21,19 +20,16 @@ import java.util.UUID;
 public class DocumentIngestionService {
 
     private final RagDocumentRepository documentRepository;
-    private final RagDocumentChunkRepository chunkRepository;
     private final ProductRepository productRepository;
     private final EmbeddingService embeddingService;
     private final AuditLogService auditLogService;
 
     public DocumentIngestionService(
             RagDocumentRepository documentRepository,
-            RagDocumentChunkRepository chunkRepository,
             ProductRepository productRepository,
             EmbeddingService embeddingService,
             AuditLogService auditLogService) {
         this.documentRepository = documentRepository;
-        this.chunkRepository = chunkRepository;
         this.productRepository = productRepository;
         this.embeddingService = embeddingService;
         this.auditLogService = auditLogService;

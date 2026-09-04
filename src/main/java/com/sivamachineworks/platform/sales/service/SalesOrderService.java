@@ -12,7 +12,6 @@ import com.sivamachineworks.platform.bom.repository.MbomItemRepository;
 import com.sivamachineworks.platform.crm.domain.Customer;
 import com.sivamachineworks.platform.crm.repository.CustomerRepository;
 import com.sivamachineworks.platform.inventory.domain.Warehouse;
-import com.sivamachineworks.platform.inventory.repository.InventoryStockRepository;
 import com.sivamachineworks.platform.inventory.repository.WarehouseRepository;
 import com.sivamachineworks.platform.inventory.service.InventoryService;
 import com.sivamachineworks.platform.pdm.domain.Product;

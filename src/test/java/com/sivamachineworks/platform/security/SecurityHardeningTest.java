@@ -24,7 +24,6 @@ import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.UUID;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -146,14 +145,13 @@ public class SecurityHardeningTest {
                 "SECURITY"
         );
 
-        MvcResult result = mockMvc.perform(post("/api/v1/ai/query")
+        mockMvc.perform(post("/api/v1/ai/query")
                 .header("Authorization", "Bearer " + adminToken)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data.hasSufficientData").value(false))
-                .andExpect(jsonPath("$.data.answer").value("Security Policy Violation: I am a read-only manufacturing assistant. Access to system credentials, passwords, or destructive operations is prohibited."))
-                .andReturn();
+                .andExpect(jsonPath("$.data.answer").value("Security Policy Violation: I am a read-only manufacturing assistant. Access to system credentials, passwords, or destructive operations is prohibited."));
     }
 
     @Test

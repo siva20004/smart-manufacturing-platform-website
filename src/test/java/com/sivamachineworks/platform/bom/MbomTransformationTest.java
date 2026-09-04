@@ -296,7 +296,7 @@ public class MbomTransformationTest {
                 .andExpect(status().isOk());
 
         // Verify that the approved mBOM is untouched and remains RELEASED with original source link
-        MvcResult verifyResult = mockMvc.perform(get("/api/v1/bom/mbom/" + mbomId)
+        mockMvc.perform(get("/api/v1/bom/mbom/" + mbomId)
                 .header("Authorization", "Bearer " + prodToken))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data.status").value("RELEASED"))

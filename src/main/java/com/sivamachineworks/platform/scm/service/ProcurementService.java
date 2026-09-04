@@ -27,7 +27,6 @@ import java.util.stream.Collectors;
 public class ProcurementService {
 
     private final SupplierRepository supplierRepository;
-    private final SupplierPartRepository supplierPartRepository;
     private final PurchaseRequestRepository purchaseRequestRepository;
     private final PurchaseOrderRepository purchaseOrderRepository;
     private final GoodsReceiptRepository goodsReceiptRepository;
@@ -37,7 +36,6 @@ public class ProcurementService {
     private final AuditLogService auditLogService;
 
     public ProcurementService(SupplierRepository supplierRepository,
-                              SupplierPartRepository supplierPartRepository,
                               PurchaseRequestRepository purchaseRequestRepository,
                               PurchaseOrderRepository purchaseOrderRepository,
                               GoodsReceiptRepository goodsReceiptRepository,
@@ -46,7 +44,6 @@ public class ProcurementService {
                               InventoryTransactionRepository transactionRepository,
                               AuditLogService auditLogService) {
         this.supplierRepository = supplierRepository;
-        this.supplierPartRepository = supplierPartRepository;
         this.purchaseRequestRepository = purchaseRequestRepository;
         this.purchaseOrderRepository = purchaseOrderRepository;
         this.goodsReceiptRepository = goodsReceiptRepository;

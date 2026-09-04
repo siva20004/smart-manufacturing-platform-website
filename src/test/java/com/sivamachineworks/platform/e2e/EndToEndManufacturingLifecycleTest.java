@@ -326,7 +326,7 @@ public class EndToEndManufacturingLifecycleTest {
                 "Quotation verified against master agreement."
         );
 
-        MvcResult reviewRes = mockMvc.perform(post("/api/v1/procurement/quotations/" + quoteId + "/review")
+        mockMvc.perform(post("/api/v1/procurement/quotations/" + quoteId + "/review")
                 .header("Authorization", "Bearer " + procToken)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(reviewReq)))
