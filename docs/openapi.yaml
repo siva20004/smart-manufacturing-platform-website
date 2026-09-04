@@ -1,0 +1,696 @@
+openapi: 3.0.3
+info:
+  title: "Siva Machine Works — Smart Manufacturing Platform API"
+  version: "1.0.0"
+  description: "Enterprise REST API for ERP, SCM, PDM/PLM, Dual-BOM, Production, QMS, Logistics, Finance, Analytics, and RAG AI Operations Assistant."
+
+servers:
+  - url: "http://localhost:8080/api/v1"
+    description: Local Dev
+  - url: "https://api.staging.sivamachineworks.com/api/v1"
+    description: Staging
+
+tags:
+  - name: Auth
+  - name: Users
+  - name: Customers
+  - name: Products
+  - name: PDM
+  - name: BOM
+  - name: Inventory
+  - name: Sales
+  - name: Procurement
+  - name: Suppliers
+  - name: Production
+  - name: Quality
+  - name: Shipments
+  - name: Invoices
+  - name: CRM
+  - name: Analytics
+  - name: AI
+  - name: Audit
+
+paths:
+  # ==========================================
+  # Auth & Users
+  # ==========================================
+  /auth/login:
+    post:
+      tags: [Auth]
+      summary: Login
+      operationId: login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /users:
+    get:
+      tags: [Users]
+      summary: List Users
+      operationId: listUsers
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedUsers'
+    post:
+      tags: [Users]
+      summary: Create User
+      operationId: createUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+  # ==========================================
+  # Customers & CRM
+  # ==========================================
+  /customers:
+    get:
+      tags: [Customers]
+      summary: List Customers
+      operationId: listCustomers
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCustomers'
+    post:
+      tags: [Customers]
+      summary: Create Customer
+      operationId: createCustomer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+
+  /crm/opportunities:
+    get:
+      tags: [CRM]
+      summary: List CRM Opportunities
+      operationId: listOpportunities
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedOpportunities'
+
+  # ==========================================
+  # Products & PDM & BOM
+  # ==========================================
+  /products:
+    get:
+      tags: [Products]
+      summary: List Products
+      operationId: listProducts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedProducts'
+    post:
+      tags: [Products]
+      summary: Create Product
+      operationId: createProduct
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+
+  /products/{productId}:
+    get:
+      tags: [Products]
+      summary: Get Product by ID
+      operationId: getProduct
+      parameters:
+        - $ref: '#/components/parameters/ProductIdParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+
+  /pdm/ecos:
+    get:
+      tags: [PDM]
+      summary: List Engineering Change Orders (ECOs)
+      operationId: listECOs
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedECOs'
+
+  /bom/ebom:
+    get:
+      tags: [BOM]
+      summary: List eBOMs
+      operationId: listEBOMs
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedBOMs'
+
+  /bom/mbom:
+    get:
+      tags: [BOM]
+      summary: List mBOMs
+      operationId: listMBOMs
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedBOMs'
+
+  # ==========================================
+  # Inventory & Suppliers & Procurement
+  # ==========================================
+  /inventory:
+    get:
+      tags: [Inventory]
+      summary: List Inventory Items
+      operationId: listInventory
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedInventory'
+
+  /suppliers:
+    get:
+      tags: [Suppliers]
+      summary: List Suppliers
+      operationId: listSuppliers
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSuppliers'
+
+  /procurement/purchase-orders:
+    get:
+      tags: [Procurement]
+      summary: List Purchase Orders
+      operationId: listPurchaseOrders
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPurchaseOrders'
+
+  # ==========================================
+  # Sales, Production, Quality
+  # ==========================================
+  /sales/orders:
+    get:
+      tags: [Sales]
+      summary: List Sales Orders
+      operationId: listSalesOrders
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSalesOrders'
+
+  /production/work-orders:
+    get:
+      tags: [Production]
+      summary: List Work Orders
+      operationId: listWorkOrders
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedWorkOrders'
+    post:
+      tags: [Production]
+      summary: Create Work Order
+      operationId: createWorkOrder
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkOrder'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkOrder'
+
+  /quality/inspections:
+    get:
+      tags: [Quality]
+      summary: List Quality Inspections
+      operationId: listInspections
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedInspections'
+
+  # ==========================================
+  # Shipments, Invoices, Analytics, AI, Audit
+  # ==========================================
+  /shipments:
+    get:
+      tags: [Shipments]
+      summary: List Shipments
+      operationId: listShipments
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedShipments'
+
+  /invoices:
+    get:
+      tags: [Invoices]
+      summary: List Invoices
+      operationId: listInvoices
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedInvoices'
+
+  /analytics/reports:
+    get:
+      tags: [Analytics]
+      summary: Get Analytics Reports
+      operationId: getAnalytics
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticsReport'
+
+  /ai/query:
+    post:
+      tags: [AI]
+      summary: RAG AI Operations Assistant Query
+      operationId: aiQuery
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AIQuery'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIResponse'
+
+  /audit/logs:
+    get:
+      tags: [Audit]
+      summary: List Audit Logs
+      operationId: listAuditLogs
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedAuditLogs'
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+    PageParam:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 1
+    LimitParam:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 20
+    ProductIdParam:
+      name: productId
+      in: path
+      required: true
+      schema:
+        type: string
+
+  responses:
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+
+  schemas:
+    # --- Generic Envelopes ---
+    ApiResponse:
+      type: object
+      properties:
+        success: { type: boolean }
+        message: { type: string }
+        
+    PaginationMeta:
+      type: object
+      properties:
+        total: { type: integer }
+        page: { type: integer }
+        limit: { type: integer }
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+          
+    ErrorDetail:
+      type: object
+      properties:
+        code: { type: string }
+        message: { type: string }
+
+    # --- Auth & User ---
+    LoginRequest:
+      type: object
+      properties:
+        email: { type: string }
+        password: { type: string }
+    LoginResponse:
+      type: object
+      properties:
+        token: { type: string }
+        user: { $ref: '#/components/schemas/User' }
+        
+    User:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        email: { type: string }
+        role: { type: string }
+    PaginatedUsers:
+      type: object
+      properties:
+        data: { type: array, items: { $ref: '#/components/schemas/User' } }
+        meta: { $ref: '#/components/schemas/PaginationMeta' }
+
+    # --- Customers & CRM ---
+    Customer:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        region: { type: string }
+    PaginatedCustomers:
+      type: object
+      properties:
+        data: { type: array, items: { $ref: '#/components/schemas/Customer' } }
+        meta: { $ref: '#/components/schemas/PaginationMeta' }
+    
+    Opportunity:
+      type: object
+      properties:
+        id: { type: string }
+        title: { type: string }
+        value: { type: number }
+        status: { type: string }
+    PaginatedOpportunities:
+      type: object
+      properties:
+        data: { type: array, items: { $ref: '#/components/schemas/Opportunity' } }
+        meta: { $ref: '#/components/schemas/PaginationMeta' }
+
+    # --- Products & PDM & BOM ---
+    Product:
+      type: object
+      properties:
+        id: { type: string }
+        sku: { type: string, example: "SMW-HM-500" }
+        name: { type: string }
+        type:
+          type: string
+          enum: [RAW_MATERIAL, SUBASSEMBLY, FINISHED_GOOD]
+    PaginatedProducts:
+      type: object
+      properties:
+        data: { type: array, items: { $ref: '#/components/schemas/Product' } }
+        meta: { $ref: '#/components/schemas/PaginationMeta' }
+
+    ECO:
+      type: object
+      properties:
+        id: { type: string }
+        title: { type: string }
+        status: { type: string }
+    PaginatedECOs:
+      type: object
+      properties:
+        data: { type: array, items: { $ref: '#/components/schemas/ECO' } }
+        meta: { $ref: '#/components/schemas/PaginationMeta' }
+
+    BOM:
+      type: object
+      properties:
+        id: { type: string }
+        productId: { type: string }
+        components:
+          type: array
+          items:
+            type: object
+            properties:
+              componentId: { type: string }
+              quantity: { type: number }
+    PaginatedBOMs:
+      type: object
+      properties:
+        data: { type: array, items: { $ref: '#/components/schemas/BOM' } }
+        meta: { $ref: '#/components/schemas/PaginationMeta' }
+
+    # --- Inventory, Suppliers, Procurement ---
+    InventoryStock:
+      type: object
+      properties:
+        id: { type: string }
+        productId: { type: string }
+        warehouse: { type: string, example: "Osaka" }
+        quantity: { type: number }
+    PaginatedInventory:
+      type: object
+      properties:
+        data: { type: array, items: { $ref: '#/components/schemas/InventoryStock' } }
+        meta: { $ref: '#/components/schemas/PaginationMeta' }
+
+    Supplier:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+    PaginatedSuppliers:
+      type: object
+      properties:
+        data: { type: array, items: { $ref: '#/components/schemas/Supplier' } }
+        meta: { $ref: '#/components/schemas/PaginationMeta' }
+
+    PurchaseOrder:
+      type: object
+      properties:
+        id: { type: string }
+        supplierId: { type: string }
+        status: { type: string }
+    PaginatedPurchaseOrders:
+      type: object
+      properties:
+        data: { type: array, items: { $ref: '#/components/schemas/PurchaseOrder' } }
+        meta: { $ref: '#/components/schemas/PaginationMeta' }
+
+    # --- Sales & Production & Quality ---
+    SalesOrder:
+      type: object
+      properties:
+        id: { type: string }
+        customerId: { type: string }
+        status: { type: string }
+    PaginatedSalesOrders:
+      type: object
+      properties:
+        data: { type: array, items: { $ref: '#/components/schemas/SalesOrder' } }
+        meta: { $ref: '#/components/schemas/PaginationMeta' }
+
+    WorkOrder:
+      type: object
+      properties:
+        id: { type: string }
+        productId: { type: string }
+        quantity: { type: integer }
+        status: { type: string, enum: [PLANNED, IN_PROGRESS, COMPLETED] }
+    PaginatedWorkOrders:
+      type: object
+      properties:
+        data: { type: array, items: { $ref: '#/components/schemas/WorkOrder' } }
+        meta: { $ref: '#/components/schemas/PaginationMeta' }
+
+    Inspection:
+      type: object
+      properties:
+        id: { type: string }
+        workOrderId: { type: string }
+        result: { type: string, enum: [PASS, FAIL] }
+    PaginatedInspections:
+      type: object
+      properties:
+        data: { type: array, items: { $ref: '#/components/schemas/Inspection' } }
+        meta: { $ref: '#/components/schemas/PaginationMeta' }
+
+    # --- Shipments, Invoices, Analytics, AI, Audit ---
+    Shipment:
+      type: object
+      properties:
+        id: { type: string }
+        orderId: { type: string }
+        status: { type: string }
+    PaginatedShipments:
+      type: object
+      properties:
+        data: { type: array, items: { $ref: '#/components/schemas/Shipment' } }
+        meta: { $ref: '#/components/schemas/PaginationMeta' }
+
+    Invoice:
+      type: object
+      properties:
+        id: { type: string }
+        amount: { type: number }
+        status: { type: string }
+    PaginatedInvoices:
+      type: object
+      properties:
+        data: { type: array, items: { $ref: '#/components/schemas/Invoice' } }
+        meta: { $ref: '#/components/schemas/PaginationMeta' }
+
+    AnalyticsReport:
+      type: object
+      properties:
+        title: { type: string }
+        data: { type: object }
+
+    AIQuery:
+      type: object
+      properties:
+        prompt: { type: string }
+        context: { type: string }
+    AIResponse:
+      type: object
+      properties:
+        response: { type: string }
+        confidence: { type: number }
+
+    AuditLog:
+      type: object
+      properties:
+        id: { type: string }
+        action: { type: string }
+        timestamp: { type: string, format: date-time }
+    PaginatedAuditLogs:
+      type: object
+      properties:
+        data: { type: array, items: { $ref: '#/components/schemas/AuditLog' } }
+        meta: { $ref: '#/components/schemas/PaginationMeta' }
+
+security:
+  - BearerAuth: []

@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/sivamachineworks_db}
+    username: ${SPRING_DATASOURCE_USERNAME:siva_user}
+    password: ${SPRING_DATASOURCE_PASSWORD:siva_password}
+  jpa:
+    show-sql: true
+jwt:
+  secret: this_is_a_very_secure_secret_key_that_needs_to_be_at_least_256_bits_long
