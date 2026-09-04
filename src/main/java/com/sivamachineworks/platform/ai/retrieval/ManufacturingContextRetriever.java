@@ -8,8 +8,6 @@ import com.sivamachineworks.platform.inventory.domain.InventoryStock;
 import com.sivamachineworks.platform.inventory.repository.InventoryStockRepository;
 import com.sivamachineworks.platform.pdm.domain.Product;
 import com.sivamachineworks.platform.pdm.repository.ProductRepository;
-import com.sivamachineworks.platform.production.domain.ProductionOperation;
-import com.sivamachineworks.platform.production.domain.ProductionOrder;
 import com.sivamachineworks.platform.production.repository.ProductionOrderRepository;
 import com.sivamachineworks.platform.sales.domain.SalesOrder;
 import com.sivamachineworks.platform.sales.repository.SalesOrderRepository;

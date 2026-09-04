@@ -4,7 +4,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sivamachineworks.platform.audit.domain.AuditLog;
 import com.sivamachineworks.platform.audit.repository.AuditLogRepository;
 import com.sivamachineworks.platform.auth.dto.LoginRequest;
-import com.sivamachineworks.platform.bom.dto.*;
+import com.sivamachineworks.platform.bom.dto.ApproveEbomRequest;
+import com.sivamachineworks.platform.bom.dto.CreateEbomItemRequest;
+import com.sivamachineworks.platform.bom.dto.CreateEbomRequest;
+import com.sivamachineworks.platform.bom.dto.CreateEbomRevisionRequest;
+import com.sivamachineworks.platform.bom.dto.UpdateEbomItemRequest;
 import com.sivamachineworks.platform.identity.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +26,9 @@ import java.util.List;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 

@@ -11,7 +11,6 @@ import com.sivamachineworks.platform.bom.repository.MbomHeaderRepository;
 import com.sivamachineworks.platform.bom.repository.MbomItemRepository;
 import com.sivamachineworks.platform.crm.domain.Customer;
 import com.sivamachineworks.platform.crm.repository.CustomerRepository;
-import com.sivamachineworks.platform.inventory.domain.InventoryStock;
 import com.sivamachineworks.platform.inventory.domain.Warehouse;
 import com.sivamachineworks.platform.inventory.repository.InventoryStockRepository;
 import com.sivamachineworks.platform.inventory.repository.WarehouseRepository;
@@ -46,7 +45,6 @@ public class SalesOrderService {
     private final CustomerRepository customerRepository;
     private final ProductRepository productRepository;
     private final WarehouseRepository warehouseRepository;
-    private final InventoryStockRepository stockRepository;
     private final InventoryService inventoryService;
     private final MbomHeaderRepository mbomHeaderRepository;
     private final MbomItemRepository mbomItemRepository;
@@ -60,7 +58,6 @@ public class SalesOrderService {
                              CustomerRepository customerRepository,
                              ProductRepository productRepository,
                              WarehouseRepository warehouseRepository,
-                             InventoryStockRepository stockRepository,
                              InventoryService inventoryService,
                              MbomHeaderRepository mbomHeaderRepository,
                              MbomItemRepository mbomItemRepository,
@@ -73,7 +70,6 @@ public class SalesOrderService {
         this.customerRepository = customerRepository;
         this.productRepository = productRepository;
         this.warehouseRepository = warehouseRepository;
-        this.stockRepository = stockRepository;
         this.inventoryService = inventoryService;
         this.mbomHeaderRepository = mbomHeaderRepository;
         this.mbomItemRepository = mbomItemRepository;

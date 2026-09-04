@@ -1,14 +1,12 @@
 package com.sivamachineworks.platform.ai.provider;
 
 import com.sivamachineworks.platform.ai.dto.AiQueryResponse;
-import com.sivamachineworks.platform.ai.dto.AiSourceCitation;
 import com.sivamachineworks.platform.ai.retrieval.RetrievedBusinessContext;
 import com.sivamachineworks.platform.inventory.domain.InventoryStock;
 import com.sivamachineworks.platform.production.domain.ProductionOrder;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 

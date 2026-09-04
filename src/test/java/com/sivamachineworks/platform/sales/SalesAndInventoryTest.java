@@ -6,9 +6,11 @@ import com.sivamachineworks.platform.audit.repository.AuditLogRepository;
 import com.sivamachineworks.platform.auth.dto.LoginRequest;
 import com.sivamachineworks.platform.identity.repository.UserRepository;
 import com.sivamachineworks.platform.inventory.dto.StockAdjustmentRequest;
-import com.sivamachineworks.platform.inventory.repository.InventoryReservationRepository;
 import com.sivamachineworks.platform.inventory.repository.InventoryStockRepository;
-import com.sivamachineworks.platform.sales.dto.*;
+import com.sivamachineworks.platform.sales.dto.CreateQuotationRequest;
+import com.sivamachineworks.platform.sales.dto.CreateSalesOrderRequest;
+import com.sivamachineworks.platform.sales.dto.QuotationItemDto;
+import com.sivamachineworks.platform.sales.dto.SalesOrderItemDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,14 +53,10 @@ public class SalesAndInventoryTest {
     private InventoryStockRepository stockRepository;
 
     @Autowired
-    private InventoryReservationRepository reservationRepository;
-
-    @Autowired
     private AuditLogRepository auditLogRepository;
 
     private String salesToken;
     private String prodToken;
-    private String mgmtToken;
 
     @BeforeEach
     public void setup() throws Exception {
@@ -69,7 +67,6 @@ public class SalesAndInventoryTest {
 
         salesToken = obtainToken("sales_user", "Password@123");
         prodToken = obtainToken("prod_user", "Password@123");
-        mgmtToken = obtainToken("mgmt_user", "Password@123");
     }
 
     private String obtainToken(String username, String password) throws Exception {

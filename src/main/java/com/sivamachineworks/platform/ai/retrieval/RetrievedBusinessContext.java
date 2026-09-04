@@ -1,7 +1,6 @@
 package com.sivamachineworks.platform.ai.retrieval;
 
 import com.sivamachineworks.platform.ai.dto.AiSourceCitation;
-import com.sivamachineworks.platform.bom.domain.EbomHeader;
 import com.sivamachineworks.platform.bom.domain.EbomItem;
 import com.sivamachineworks.platform.inventory.domain.InventoryStock;
 import com.sivamachineworks.platform.production.domain.ProductionOrder;

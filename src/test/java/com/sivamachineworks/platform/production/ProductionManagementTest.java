@@ -55,7 +55,6 @@ public class ProductionManagementTest {
 
     private String prodToken;
     private String engToken;
-    private String mgmtToken;
 
     @BeforeEach
     public void setup() throws Exception {
@@ -66,7 +65,6 @@ public class ProductionManagementTest {
 
         prodToken = obtainToken("prod_user", "Password@123");
         engToken = obtainToken("eng_user", "Password@123");
-        mgmtToken = obtainToken("mgmt_user", "Password@123");
     }
 
     private String obtainToken(String username, String password) throws Exception {
@@ -156,7 +154,7 @@ public class ProductionManagementTest {
                 .orElse(BigDecimal.ZERO);
 
         // 6. Complete Production: QUALITY_CHECK -> COMPLETED (Consumes raw materials, increases FG inventory)
-        MvcResult completeResult = mockMvc.perform(put("/api/v1/production/orders/" + orderId + "/complete")
+        mockMvc.perform(put("/api/v1/production/orders/" + orderId + "/complete")
                 .header("Authorization", "Bearer " + prodToken))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data.status").value("COMPLETED"))

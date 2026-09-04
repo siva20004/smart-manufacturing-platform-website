@@ -18,11 +18,8 @@ import com.sivamachineworks.platform.rag.dto.IngestDocumentRequest;
 import com.sivamachineworks.platform.sales.dto.CreateSalesOrderRequest;
 import com.sivamachineworks.platform.sales.dto.SalesOrderItemDto;
 import com.sivamachineworks.platform.sales.dto.SalesOrderResponse;
-import com.sivamachineworks.platform.scm.dto.GoodsReceiptItemDto;
-import com.sivamachineworks.platform.scm.dto.PostGoodsReceiptRequest;
 import com.sivamachineworks.platform.scm.quotation.dto.ReviewQuotationRequest;
 import com.sivamachineworks.platform.scm.quotation.dto.UploadQuotationRequest;
-import com.sivamachineworks.platform.scm.repository.PurchaseOrderRepository;
 import com.sivamachineworks.platform.scm.repository.SupplierRepository;
 import com.sivamachineworks.platform.shared.security.RateLimitingFilter;
 import org.junit.jupiter.api.BeforeEach;
@@ -42,7 +39,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -66,9 +62,6 @@ public class EndToEndManufacturingLifecycleTest {
 
     @Autowired
     private SupplierRepository supplierRepository;
-
-    @Autowired
-    private PurchaseOrderRepository purchaseOrderRepository;
 
     @Autowired
     private RateLimitingFilter rateLimitingFilter;
@@ -342,7 +335,6 @@ public class EndToEndManufacturingLifecycleTest {
                 .andExpect(jsonPath("$.data.generatedPoCode").exists())
                 .andReturn();
 
-        UUID generatedPoId = UUID.fromString(objectMapper.readTree(reviewRes.getResponse().getContentAsString()).get("data").get("generatedPoId").asText());
 
         // ==========================================
         // 7. PRODUCTION ORDER & EXECUTION

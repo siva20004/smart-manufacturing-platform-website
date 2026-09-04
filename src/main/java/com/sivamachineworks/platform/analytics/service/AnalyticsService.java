@@ -1,6 +1,12 @@
 package com.sivamachineworks.platform.analytics.service;
 
-import com.sivamachineworks.platform.analytics.dto.*;
+import com.sivamachineworks.platform.analytics.dto.InventoryValueDto;
+import com.sivamachineworks.platform.analytics.dto.OrderVolumeDto;
+import com.sivamachineworks.platform.analytics.dto.ProductionAnalyticsDto;
+import com.sivamachineworks.platform.analytics.dto.SalesByCustomerDto;
+import com.sivamachineworks.platform.analytics.dto.SalesByProductDto;
+import com.sivamachineworks.platform.analytics.dto.ServiceMetricsDto;
+import com.sivamachineworks.platform.analytics.dto.SupplierPerformanceDto;
 import com.sivamachineworks.platform.crm.domain.ServiceRequest;
 import com.sivamachineworks.platform.crm.repository.ServiceRequestRepository;
 import com.sivamachineworks.platform.inventory.domain.InventoryStock;
@@ -17,7 +23,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
