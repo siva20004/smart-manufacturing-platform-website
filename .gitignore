@@ -72,3 +72,7 @@ __pycache__/
 # Local runtime storage
 storage/
 uploads/
+
+# Storage service source code
+!src/main/java/com/sivamachineworks/platform/shared/storage/
+!src/main/java/com/sivamachineworks/platform/shared/storage/*.java
