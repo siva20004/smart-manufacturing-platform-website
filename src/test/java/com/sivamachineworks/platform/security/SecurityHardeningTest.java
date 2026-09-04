@@ -9,7 +9,7 @@ import com.sivamachineworks.platform.pdm.dto.DocumentResponse;
 import com.sivamachineworks.platform.pdm.service.DocumentService;
 import com.sivamachineworks.platform.shared.exception.BaseException;
 import com.sivamachineworks.platform.shared.security.RateLimitingFilter;
-import com.sivamachineworks.platform.shared.service.StorageService;
+import com.sivamachineworks.platform.shared.storage.StorageService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

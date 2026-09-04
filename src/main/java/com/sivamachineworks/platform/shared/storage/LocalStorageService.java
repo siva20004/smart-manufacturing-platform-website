@@ -13,7 +13,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.Set;
 
 @Service
-public class LocalStorageService implements StorageService, com.sivamachineworks.platform.shared.service.StorageService {
+public class LocalStorageService implements com.sivamachineworks.platform.shared.service.StorageService {
 
     private static final long MAX_FILE_SIZE_BYTES = 524_288_000L; // 500 MB limit
     private static final Set<String> DANGEROUS_EXTENSIONS = Set.of(
@@ -77,11 +77,6 @@ public class LocalStorageService implements StorageService, com.sivamachineworks
         } catch (IOException e) {
             throw new RuntimeException("Failed to delete file", e);
         }
-    }
-
-    @Override
-    public String getStorageLocation(String key) {
-        return "local";
     }
 
     private void validateStorageKey(String key) {
